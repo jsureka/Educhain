@@ -59,11 +59,26 @@ describe("Greeter tests", function () {
       await expect(greeter.connect(otherAccounts[0]).tokenURI(4)).to.equal('jaiccha');
     });
 
+<<<<<<< HEAD
     it("Check if owner of token is shown ", async function () {   
       const { greeter, owner, otherAccounts } = await loadFixture(deployOnceFixture);
       await expect(greeter.connect(otherAccounts[0]).ownerOf(0)).to.equal(otherAccounts[0]);
+=======
+
+
+
+    it("Check putstake is working", async function () {   
+      const { greeter, owner, otherAccounts } = await loadFixture(deployOnceFixture);
+      await (await greeter.connect(otherAccounts[0]).putStake(1,{value: 10000000000000}));
+>>>>>>> bce91d0528dc1b162adeddeac8ae1bf3e0262c0f
     });
 
+    
+  
+    it("Check current student is the owner of current wallet", async function () {   
+      const { greeter, owner, otherAccounts } = await loadFixture(deployOnceFixture);
+      await expect(greeter.connect(otherAccounts[0]).getStudent());
+    });
 
 
     it("Check putstake is working", async function () {   
