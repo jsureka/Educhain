@@ -13,6 +13,7 @@ import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 import { useTheme } from 'next-themes'
 import { app } from 'appConfig'
 import { useState, useEffect } from 'react'
+import { Provider as AlertProvider } from 'react-alert'
 
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
