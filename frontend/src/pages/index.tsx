@@ -1,5 +1,6 @@
 import styles from 'styles/Home.module.scss'
 import Navbar from 'components/navbar/navbar'
+import router from 'next/router'
 import data from '../info/data.json'
 import { ethers } from 'ethers'
 import ThemeToggleButton from 'components/Theme/ThemeToggleButton'
@@ -248,6 +249,11 @@ function Header() {
 //   )
 // }
 
+const goToWallet = (e)=>{
+    e.preventDefault();
+    router.push('/metamask');
+}
+
 function Main() {
   return (
     <div className="container">
@@ -256,7 +262,7 @@ function Main() {
           <Image src={coverWritings} width={500} height={250}></Image>
           <div className="group">
             {/* <Image src={s}></Image> */}
-            <button className={styles.connectWallet}>CONNECT WALLET</button>
+            <button className={styles.connectWallet} onClick={goToWallet}>CONNECT WALLET</button>
           </div>
         </div>
         <div className="col-span-4">

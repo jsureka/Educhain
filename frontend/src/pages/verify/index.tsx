@@ -1,7 +1,5 @@
 import styles from 'styles/Verify.module.scss'
-<<<<<<< HEAD
 import Navbar from 'components/navbar/navbar'
-=======
 import data from '../../info/data.json'
 import Image from 'next/image'
 import certificate from '../../../public/certificate.png'
@@ -10,7 +8,6 @@ import { auto } from '@popperjs/core'
 import { useState, useEffect } from 'react'
 import { Greeter__factory } from '../../typechain'
 import { ethers } from 'ethers'
->>>>>>> 7a96279e22eada787b15e502f1e1dfa820ada4c5
 
 export default function Verify() {
   const [inputToken, setInputToken] = useState()
