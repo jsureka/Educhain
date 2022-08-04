@@ -253,17 +253,17 @@ function Header() {
 
 function Main() {
   return (
-    <div className=" container">
+    <div className="container">
       <div className="grid grid-cols-12 ">
-        <div className="col-span-6 p-5 m-5">
+        <div className="col-span-8 p-5 mx-6">
           <Image src={coverWritings} width={500} height={250}></Image>
           <div className="group">
             {/* <Image src={s}></Image> */}
             <button className={styles.connectWallet}>CONNECT WALLET</button>
           </div>
         </div>
-        <div className=" col-span-6  ">
-          <Image src={coverImage} width={500} height={400}></Image>
+        <div className="col-span-4">
+          <Image src={coverImage} width={800} height={600}></Image>
         </div>
       </div>
       <h5 className={styles.popularCourses}>MOST POPULAR CERTIFICATES</h5>
