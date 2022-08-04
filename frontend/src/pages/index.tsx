@@ -254,6 +254,10 @@ const goToWallet = (e)=>{
     router.push('/metamask');
 }
 
+const goToCourse = ()=>{
+  router.push('/course');
+}
+
 function Main() {
   return (
     <div className="container">
@@ -271,7 +275,7 @@ function Main() {
       </div>
       <h5 className={styles.popularCourses}>MOST POPULAR CERTIFICATES</h5>
       <div className="grid grid-cols-12">
-        <div className=" col-span-3  mr-4 ml-4">
+        <div className=" col-span-3  mr-4 ml-4" onClick={goToCourse}>
           <div className="m-auto w-90 mt-5 max-w-lg items-center justify-center overflow-hidden rounded-2xl shadow-xl">
             <div className="h-24 bg-white">
               <Image src={courseCover2} width={400} height={200}></Image>
@@ -285,7 +289,7 @@ function Main() {
           </div>
         </div>
 
-        <div className=" col-span-3 mr-4 ml-4">
+        <div className=" col-span-3 mr-4 ml-4" onClick={goToCourse}>
           <div className="m-auto w-90 mt-5 max-w-lg items-center justify-center overflow-hidden rounded-2xl shadow-xl">
             <div className="h-24 bg-white">
               <Image src={courseCover1} width={400} height={200}></Image>
@@ -300,7 +304,7 @@ function Main() {
         </div>
 
         
-        <div className=" col-span-3 mr-4 ml-4">
+        <div className=" col-span-3 mr-4 ml-4" onClick={goToCourse}>
           <div className="m-auto w-90 mt-5 max-w-lg items-center justify-center overflow-hidden rounded-2xl shadow-xl">
             <div className="h-24 bg-white">
               <Image src={courseCover1} width={400} height={200}></Image>
@@ -315,7 +319,7 @@ function Main() {
         </div>
 
         
-        <div className=" col-span-3 mr-4 ml-4">
+        <div className=" col-span-3 mr-4 ml-4" onClick={goToCourse}>
           <div className="m-auto w-90 mt-5 max-w-lg items-center justify-center overflow-hidden rounded-2xl shadow-xl">
             <div className="h-24 bg-white">
               <Image src={courseCover2} width={400} height={200}></Image>

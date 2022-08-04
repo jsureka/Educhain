@@ -51,15 +51,9 @@ function Main() {
         await window.ethereum.enable();
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
-
-
         contract = Greeter__factory.connect(data.contractAddress, signer);
         console.log("Get method:");
-
         console.log(contract);
-
-        console.log(await contract.greet());
-        setgreet(await contract.greet() as string);
     }
 
     useEffect(() => {

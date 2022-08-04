@@ -77,8 +77,6 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
           ""
         );
 
-        // require(owner.send(address(this).balance));
-
         require(sent, "Failed to send Ether");
       _studentTemp[i].currentCheckpoints++;
       }
