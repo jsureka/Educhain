@@ -1,10 +1,48 @@
 import styles from 'styles/Verify.module.scss'
+import data from '../../info/data.json'
 import Image from 'next/image'
 import certificate from '../../../public/certificate.png'
 import badge_background from '../../../public/badge_background.png'
 import { auto } from '@popperjs/core'
+import { useState, useEffect } from 'react'
+import { Greeter__factory } from '../../typechain'
+import { ethers } from 'ethers'
 
 export default function Verify() {
+  const [inputToken, setInputToken] = useState()
+  let contract
+  
+  async function checkIfWalletIsConnected() {
+    const { ethereum } = window
+    if (ethereum) {
+      console.log('Got the ethereum obejct: ', ethereum)
+    } else {
+      console.log('No Wallet found. Connect Wallet')
+    }
+    await window.ethereum.enable();
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+
+    contract = Greeter__factory.connect(data.contractAddress, signer);
+    console.log("Get method:");
+
+    console.log(contract);
+  }
+
+  useEffect(() => {
+    checkIfWalletIsConnected();
+  }, [])
+  console.log(data.contractAddress);
+
+  async function onTokenSubmit(e) {
+    e.preventDefault()
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    const signer = provider.getSigner()
+    contract = Greeter__factory.connect(data.contractAddress, signer)
+    let tx = await contract.ownerOf(inputToken)
+ //   let reciept = await tx.wait()
+    console.log(tx)
+  }
   return (
     <div>
       <Header></Header>
@@ -15,10 +53,10 @@ export default function Verify() {
           <form className="relative flex items-center">
             <label className="sr-only">Search</label>
             <div className=" w-full">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                
-              </div>
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"></div>
               <input
+                value={inputToken}
+                onChange={e => setInputToken(e.target.value)}
                 type="text"
                 id="simple-search"
                 className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
@@ -29,6 +67,7 @@ export default function Verify() {
             <button
               type="submit"
               className="ml-2 rounded-lg border border-blue-700 bg-blue-700 p-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              onClick={onTokenSubmit}
             >
               <svg
                 className="h-5 w-5"
@@ -52,14 +91,14 @@ export default function Verify() {
       </div>
       <div className=" grid grid-cols-12">
         <div className=" col-span-2"></div>
-          <div className={styles.image1}>
-            <Image src={certificate} width={700} height={500}></Image>
-          </div>
+        <div className={styles.image1}>
+          <Image src={certificate} width={700} height={500}></Image>
+        </div>
 
-          <div className={styles.image2}>
-            <h1>Your Name</h1>
-            <h4>TimeStamp</h4>
-          </div>
+        <div className={styles.image2}>
+          <h1>Your Name</h1>
+          <h4>TimeStamp</h4>
+        </div>
         <div className=" col-span-2"></div>
       </div>
     </div>

@@ -6,7 +6,7 @@ async function main() {
 
   const Greeter = await ethers.getContractFactory("Greeter");
   // const greeting = await Greeting.deploy("Hello world", { value: lockedAmount });
-  const greeter = await Greeter.deploy("Hello, world!");
+  const greeter = await Greeter.deploy();
 
   await greeter.deployed();
 
