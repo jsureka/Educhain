@@ -1,6 +1,7 @@
 import styles from 'styles/Home.module.scss'
 import Navbar from 'components/navbar/navbar'
 import router from 'next/router'
+import Link from 'next/link'
 import data from '../info/data.json'
 import { ethers } from 'ethers'
 import ThemeToggleButton from 'components/Theme/ThemeToggleButton'
@@ -14,6 +15,7 @@ import { useSignMessage } from 'wagmi'
 import coverImage from '../../public/cover.png'
 import metamask from '../../public/metamask.png'
 import coverWritings from '../../public/coverWritings.png'
+import browse from '../../public/browse.png'
 import courseCover1 from "../../public/courseCover1.png"
 import courseCover2 from '../../public/courseCover2.png'
 import course1 from '../../public/course1.png'
@@ -254,29 +256,38 @@ const goToWallet = (e)=>{
     router.push('/metamask');
 }
 
-const goToCourse = ()=>{
-  router.push('/course');
+const goToCourses = (e)=>{
+  e.preventDefault();
+    router.push('/course');
 }
 
 function Main() {
   return (
     <div className="container">
       <div className="grid grid-cols-12 ">
-        <div className="col-span-8 p-5 mx-6">
-          <Image src={coverWritings} width={500} height={250}></Image>
+        <div className={styles.cover}>
+          <Image src={coverWritings} width={550} height={250}></Image>
           <div className="group">
             {/* <Image src={s}></Image> */}
-            <button className={styles.connectWallet} onClick={goToWallet}>CONNECT WALLET</button>
+            <button className={styles.connectWallet} onClick={goToWallet}></button>
           </div>
         </div>
-        <div className="col-span-4">
+        <div className={styles.coverImage}>
           <Image src={coverImage} width={800} height={600}></Image>
         </div>
       </div>
+      <div className={styles.browse}>
+      <Link href='#browseCourse' scroll={true}>
+        <a>
+          <Image src={browse} width={320} height={60}></Image>
+        </a>
+      </Link>
+      </div>
+      <div id="browseCourse">
       <h5 className={styles.popularCourses}>MOST POPULAR CERTIFICATES</h5>
       <div className="grid grid-cols-12">
-        <div className=" col-span-3  mr-4 ml-4" onClick={goToCourse}>
-          <div className="m-auto w-90 mt-5 max-w-lg items-center justify-center overflow-hidden rounded-2xl shadow-xl">
+        <div className=" col-span-3  mr-4 ml-4">
+          <div className="m-auto w-90 mt-5 max-w-lg items-center justify-center overflow-hidden rounded-2xl shadow-xl" onClick={goToCourses}>
             <div className="h-24 bg-white">
               <Image src={courseCover2} width={400} height={200}></Image>
             </div>
@@ -289,8 +300,8 @@ function Main() {
           </div>
         </div>
 
-        <div className=" col-span-3 mr-4 ml-4" onClick={goToCourse}>
-          <div className="m-auto w-90 mt-5 max-w-lg items-center justify-center overflow-hidden rounded-2xl shadow-xl">
+        <div className=" col-span-3 mr-4 ml-4">
+          <div className="m-auto w-90 mt-5 max-w-lg items-center justify-center overflow-hidden rounded-2xl shadow-xl" onClick={goToCourses}>
             <div className="h-24 bg-white">
               <Image src={courseCover1} width={400} height={200}></Image>
             </div>
@@ -304,8 +315,8 @@ function Main() {
         </div>
 
         
-        <div className=" col-span-3 mr-4 ml-4" onClick={goToCourse}>
-          <div className="m-auto w-90 mt-5 max-w-lg items-center justify-center overflow-hidden rounded-2xl shadow-xl">
+        <div className=" col-span-3 mr-4 ml-4">
+          <div className="m-auto w-90 mt-5 max-w-lg items-center justify-center overflow-hidden rounded-2xl shadow-xl" onClick={goToCourses}>
             <div className="h-24 bg-white">
               <Image src={courseCover1} width={400} height={200}></Image>
             </div>
@@ -319,8 +330,8 @@ function Main() {
         </div>
 
         
-        <div className=" col-span-3 mr-4 ml-4" onClick={goToCourse}>
-          <div className="m-auto w-90 mt-5 max-w-lg items-center justify-center overflow-hidden rounded-2xl shadow-xl">
+        <div className=" col-span-3 mr-4 ml-4">
+          <div className="m-auto w-90 mt-5 max-w-lg items-center justify-center overflow-hidden rounded-2xl shadow-xl" onClick={goToCourses}>
             <div className="h-24 bg-white">
               <Image src={courseCover2} width={400} height={200}></Image>
             </div>
@@ -333,6 +344,70 @@ function Main() {
           </div>
         </div>
         
+      </div>
+      <br />
+      <br />
+      <h5 className={styles.freeCourses}>GET STARTED WITH THESE FREE COURSES</h5>
+      <div className="grid grid-cols-12">
+        <div className=" col-span-3  mr-4 ml-4">
+          <div className="m-auto w-90 mt-5 max-w-lg items-center justify-center overflow-hidden rounded-2xl shadow-xl" onClick={goToCourses}>
+            <div className="h-24 bg-white">
+              <Image src={courseCover2} width={400} height={200}></Image>
+            </div>
+            <div className="mt-12 flex justify-center">
+              <Image src={university2} width={50} height={50}></Image>
+            </div>
+            <div className=' p-6'>
+              <Image src={course1}></Image>
+            </div>
+          </div>
+        </div>
+
+        <div className=" col-span-3 mr-4 ml-4">
+          <div className="m-auto w-90 mt-5 max-w-lg items-center justify-center overflow-hidden rounded-2xl shadow-xl" onClick={goToCourses}>
+            <div className="h-24 bg-white">
+              <Image src={courseCover1} width={400} height={200}></Image>
+            </div>
+            <div className="mt-12 flex justify-center">
+              <Image src={university1} width={50} height={50}></Image>
+            </div>
+            <div className=' p-6'>
+              <Image src={course1}></Image>
+            </div>
+          </div>
+        </div>
+
+        
+        <div className=" col-span-3 mr-4 ml-4">
+          <div className="m-auto w-90 mt-5 max-w-lg items-center justify-center overflow-hidden rounded-2xl shadow-xl" onClick={goToCourses}>
+            <div className="h-24 bg-white">
+              <Image src={courseCover1} width={400} height={200}></Image>
+            </div>
+            <div className="mt-12 flex justify-center">
+              <Image src={university1} width={50} height={50}></Image>
+            </div>
+            <div className=' p-6'>
+              <Image src={course1}></Image>
+            </div>
+          </div>
+        </div>
+
+        
+        <div className=" col-span-3 mr-4 ml-4">
+          <div className="m-auto w-90 mt-5 max-w-lg items-center justify-center overflow-hidden rounded-2xl shadow-xl" onClick={goToCourses}>
+            <div className="h-24 bg-white">
+              <Image src={courseCover2} width={400} height={200}></Image>
+            </div>
+            <div className="mt-12 flex justify-center">
+              <Image src={university2} width={50} height={50}></Image>
+            </div>
+            <div className=' p-6'>
+              <Image src={course1}></Image>
+            </div>
+          </div>
+        </div>
+        
+      </div>
       </div>
     </div>
   )
