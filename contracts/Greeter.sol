@@ -38,18 +38,23 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
     console.log("Deployed the Contract:");
   }
 
-  function safeMint(address to, string memory uri) public  {
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
-        _safeMint(to, tokenId);
-        _setTokenURI(tokenId, uri);
+  function unsafe_inc(uint x) private pure returns (uint) 
+  {
+    unchecked {
+        return x+1;
     }
+  }
 
-      function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+  function safeMint(address to, string memory uri) public {
+    uint256 tokenId = _tokenIdCounter.current();
+    _tokenIdCounter.increment();
+    _safeMint(to, tokenId);
+    _setTokenURI(tokenId, uri);
+  }
 
-        
-        super._burn(tokenId);
-    }
+  function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+    super._burn(tokenId);
+  }
 
   function putStake(uint128 course_id) public payable {
     require(msg.value == 10000000000000, "Not enough ETH to enroll");
@@ -59,10 +64,15 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
   }
 
   function transferValue() external {
-    for (uint256 i; i < students.length; i++) {
-      if (students[i].from == msg.sender) {
-        require(students[i].currentCheckpoints <= 4, "Checkpoints Completed!");
-        uint128 sendValue = 10000000000000 / 4;
+    Student[] storage _studentTemp= students;
+
+// gas optimization
+    for (uint256 i; i < _studentTemp.length; i= unsafe_inc(i)) {
+      if (_studentTemp[i].from == msg.sender) {
+        require(_studentTemp[i].currentCheckpoints <= 4, "Checkpoints Completed!");
+
+        // To make profit
+        uint128 sendValue = 10000000000000 / 8;
         (bool sent, bytes memory data) = msg.sender.call{ value: sendValue }(
           ""
         );
@@ -70,10 +80,26 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
         // require(owner.send(address(this).balance));
 
         require(sent, "Failed to send Ether");
-        students[i].currentCheckpoints++;
+      _studentTemp[i].currentCheckpoints++;
       }
     }
+
+    students=_studentTemp;
   }
+
+
+  function getStudents() public view returns (Student[] memory) {
+    return students;
+  }
+
+  function getStudent() public view returns (Student memory) {
+// gas optimization ,using unsafe_inc,local storage to decrease gas fee
+    for (uint256 i; i < students.length; i= unsafe_inc(i)) {
+      if (students[i].from == msg.sender) return students[i];
+    }
+    
+  }
+
 
   function _afterTokenTransfer(
     address from,
@@ -83,6 +109,8 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
     super._afterTokenTransfer(from, to, tokenId);
   }
 
+
+// Check if certificates are not transferrable
   function _beforeTokenTransfer(
     address from,
     address to,
@@ -92,12 +120,14 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
     super._beforeTokenTransfer(from, to, tokenId);
   }
 
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        override(ERC721, ERC721URIStorage)
-        returns (string memory)
-    {
-        return super.tokenURI(tokenId);
-    }
+
+// View issued certificate
+  function tokenURI(uint256 tokenId)
+    public
+    view
+    override(ERC721, ERC721URIStorage)
+    returns (string memory)
+  {
+    return super.tokenURI(tokenId);
+  }
 }
