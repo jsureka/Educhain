@@ -1,6 +1,6 @@
 import { useAccount } from 'wagmi'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
-
+import styles from 'styles/ConnectWallet.module.scss'
 interface Props {
   show?: 'always' | 'connected' | 'disconnected'
 }

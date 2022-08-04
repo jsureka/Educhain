@@ -1,4 +1,4 @@
-import styles from 'styles/Home.module.scss'
+import styles from 'styles/Home.module.scss';
 import data from '../info/data.json';
 import { ethers } from 'ethers'
 import ThemeToggleButton from 'components/Theme/ThemeToggleButton'
@@ -24,17 +24,9 @@ export default function Home() {
 
 function Header() {
   return (
-    <header className={styles.header}>
-      <div>
-        <ThemeToggleList />
-      </div>
-      <div className="flex items-center">
-        <ThemeToggleButton /> header <ThemeToggleList />
-      </div>
-
-      <div className="flex items-center">
-        <ThemeToggleButton />
-        <ThemeToggleList />
+    <header >
+      <div className={styles.heading}>
+        <h1 className={styles.appName}>EduChain</h1>
       </div>
     </header>
   )
@@ -113,50 +105,15 @@ function Main() {
   const { openAccountModal } = useAccountModal()
   const { openChainModal } = useChainModal()
   return (
-    <main className={styles.main + ' space-y-6'}>
-      <div className="text-center">
-        <p className="font-medium">My DAPP</p>
-      </div>
-
+    <main className={styles.main + ' space-y-2'}>
       <div>
-        <h4 className="text-center text-sm font-medium">demo: ConnectWalletBtn Full</h4>
         <div className="flex w-full flex-col items-center">
-          <ConnectWallet />
-        </div>
-      </div>
-
-      <div>
-        <h4 className="text-center text-sm font-medium">demo: useModal (rainbowkit ^0.4.3)</h4>
-        <div className="flex w-full flex-col items-center">
-          {openConnectModal && (
-            <button
-              onClick={openConnectModal}
-              type="button"
-              className="m-1 rounded-lg bg-orange-500 py-1 px-3 text-white transition-all duration-150 hover:scale-105"
-            >
-              useConnectModal
-            </button>
-          )}
-
-          {openAccountModal && (
-            <button
-              onClick={openAccountModal}
-              type="button"
-              className="m-1 rounded-lg bg-orange-500 py-1 px-3 text-white transition-all duration-150 hover:scale-105"
-            >
-              useAccountModal
-            </button>
-          )}
-
-          {openChainModal && (
-            <button
-              onClick={openChainModal}
-              type="button"
-              className="m-1 rounded-lg bg-orange-500 py-1 px-3 text-white transition-all duration-150 hover:scale-105"
-            >
-              useChainModal
-            </button>
-          )}
+        <button onClick={openConnectModal}
+        type="button"
+        className={styles.connectWallet}
+      >
+       CONNECT
+      </button>
         </div>
       </div>
 

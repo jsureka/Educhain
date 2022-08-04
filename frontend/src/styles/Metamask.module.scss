@@ -20,22 +20,46 @@
 }
 
 .main {
-  @apply flex flex-col;
-  padding: 1rem 0;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
+   @apply flex flex-col;
+//   padding: 1rem 0;
+//   flex: 1;
+//justify-content: center;
+  //align-items: center;
 }
 
 .connectWallet{
   @apply border bg-gray-700 text-white rounded-md px-4 py-2 m-2 transition duration-500 select-none ;
+  margin-top: 20px;
+  width: 10rem;
+  height: 3rem;
+  font-size: 20px;
+  font-style: bold;
   background: linear-gradient(184.39deg, #E4761B 3.37%, #8F4507 89%);
   border-radius: 60px;
+}
+
+.metamaskIcon{
+    margin-top: 30%;
+    margin-left: 30%;
+    margin-right: 10rem !important;
+    height: 30%;
+    width: auto;
+}
+
+.walletInfo{
+    background-image: url("../../public/bg-wallet.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-top: 8rem;
+    height: 30rem;
+    width: auto;
 }
 
 .dl {
   dt {
     @apply pt-2 text-sm uppercase text-gray-500;
+    color: #8b4409;
+    font-weight: 500;
   }
   dd {
     @apply font-medium;
