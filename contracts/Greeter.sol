@@ -26,6 +26,7 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
     string name;
     uint128 course_id;
     uint128 currentCheckpoints;
+    uint256 tokenId;
   }
 
   Student[] students;
@@ -50,6 +51,11 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
     _tokenIdCounter.increment();
     _safeMint(to, tokenId);
     _setTokenURI(tokenId, uri);
+    for (uint256 i; i < students.length; i = unsafe_inc(i)) {
+      if (students[i].from == msg.sender) {
+        students[i].tokenId = tokenId;
+      }
+    }
   }
 
   function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
@@ -59,7 +65,7 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
   function putStake(uint128 course_id) public payable {
     require(msg.value == 1000000000000, "Not enough ETH to enroll");
     students.push(
-      Student(msg.sender, block.timestamp, "Mustahid", course_id, 0)
+      Student(msg.sender, block.timestamp, "Mustahid", course_id, 0, 1000)
     );
   }
 
@@ -82,6 +88,9 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
 
         require(sent, "Failed to send Ether");
         _studentTemp[i].currentCheckpoints++;
+        if (_studentTemp[i].currentCheckpoints == 4) {
+          safeMint(msg.sender, _studentTemp[i].name);
+        }
         checkpoint = _studentTemp[i].currentCheckpoints;
       }
     }

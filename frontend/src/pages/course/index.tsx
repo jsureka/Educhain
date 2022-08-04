@@ -62,6 +62,18 @@ export default function Course() {
   function ontakeQuiz() {
     router.push('/quiz')
   }
+  async function onGetCertificate() {
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    const signer = provider.getSigner()
+    contract = Greeter__factory.connect(data.contractAddress, signer)
+    let tx = await contract.safeMint(address, 'Jitesh Sureka')
+    let receipt = await tx.wait()
+    console.log(receipt)
+    if (receipt) {
+      console.log('success');
+      setCurrentCheckpoint(5);
+    }
+  }
   useEffect(() => {
     checkIfWalletIsConnected()
     getStudent()
@@ -76,16 +88,18 @@ export default function Course() {
             Learn <br /> Blockchain
           </h1>
           <div className={styles.buttons}>
-          {!isEnrolled && (
-            <button className={styles.enrollButton} onClick={onEnroll}>
-              Enroll
-            </button>
-          )}
-          {isEnrolled && <button className={styles.enrolledButton}>Enrolled</button>}
+            {!isEnrolled && (
+              <button className={styles.enrollButton} onClick={onEnroll}>
+                Enroll
+              </button>
+            )}
+            {isEnrolled && <button className={styles.enrolledButton}>Enrolled</button>}
 
-          <button className={styles.getCerButton}>
-              Get Your Certificate
-            </button>
+            {currentCheckpoint === 4 && (
+              <button className={styles.getCerButton} onClick={onGetCertificate}>
+                Get Your Certificate
+              </button>
+            )}
           </div>
         </div>
         <div className={styles.avatar}>
@@ -150,7 +164,7 @@ export default function Course() {
                 </button>
               </div>
             )}
-            {currentCheckpoint > 0 && <p>Completed</p>}
+            {currentCheckpoint > 0 && <p className={styles.hotash}>Completed</p>}
           </div>
           <hr className={styles.hr}></hr>
           <div className="grid grid-cols-12 gap-2">
@@ -192,8 +206,8 @@ export default function Course() {
                 </button>
               </div>
             )}
-            {currentCheckpoint < 1 && <p>Locked</p>}
-            {currentCheckpoint > 1 && <p>Completed</p>}
+            {currentCheckpoint < 1 && <p className={styles.hotashL}>Locked</p>}
+            {currentCheckpoint > 1 && <p className={styles.hotash}>Completed</p>}
           </div>
           <hr className={styles.hr}></hr>
           <div className="grid grid-cols-12 gap-2">
@@ -235,8 +249,8 @@ export default function Course() {
                 </button>
               </div>
             )}
-            {currentCheckpoint < 2 && <p>Locked</p>}
-            {currentCheckpoint > 2 && <p>Completed</p>}
+            {currentCheckpoint < 2 && <h5 className={styles.hotashL}>Locked</h5>}
+            {currentCheckpoint > 2 && <h5 className={styles.hotash}>Completed</h5>}
           </div>
           <hr className={styles.hr}></hr>
           <div className="grid grid-cols-12 gap-2">
@@ -278,8 +292,8 @@ export default function Course() {
                 </button>
               </div>
             )}
-            {currentCheckpoint < 3 && <p>Locked</p>}
-            {currentCheckpoint > 3 && <p>Completed</p>}
+            {currentCheckpoint < 3 && <p className={styles.hotashL}>Locked</p>}
+            {currentCheckpoint > 3 && <p className={styles.hotash}>Completed</p>}
           </div>
         </div>
       </div>

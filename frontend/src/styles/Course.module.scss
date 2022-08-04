@@ -38,7 +38,8 @@
 
   .lessonDetails{
     @apply col-span-5;
-    margin-top: 14%;
+    margin-top: 10%;
+    margin-bottom: 10%;
     font-family: 'Poppins', sans-serif;
     font-size: 22px;
   }
@@ -78,6 +79,26 @@
     background-color: #b4591c;
   }
 
+  .hotash, .hotashL {
+    background-color: #137e00;
+    height: 40px;
+    width:10rem;
+    text-align: center;
+    color: white;
+    margin-top: 70%;
+    margin-left: 60%;
+    padding-right: 20%;
+    padding-left: 20%;
+    padding-top: 5%;
+    border-radius: 30px;
+    font-size: 18px;
+
+  }
+
+  .hotashL{
+    background-color: #858585;
+  }
+
   .arrow{
     @apply h-6 w-6;
     margin-left: 10%;
@@ -97,6 +118,7 @@
   }
 
   .enrolledButton{
+    @apply text-white font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2;
     background-color: #04610f;
     margin-top: 50px;
     font-size: 20px;

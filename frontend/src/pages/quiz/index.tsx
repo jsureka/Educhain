@@ -69,9 +69,10 @@ export default function Quiz() {
     //console.log(tx);
     if (reciept) {
        // const result = await storeNFT('certificate.png', "Anonymous",Date.now().toString())
-            let tx = await contract.safeMint(address, "Certified Student");
-            let reciept = await tx.wait();
-            console.log(reciept)
+            // let tx = await contract.safeMint(address, "Certified Student");
+            // let reciept = await tx.wait();
+            // console.log(reciept)
+            router.push('/course');
     }
   }
 
