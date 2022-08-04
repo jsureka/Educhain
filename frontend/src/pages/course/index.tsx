@@ -18,7 +18,7 @@ export default function Course() {
   let contract
   const { address, isConnected, connector } = useAccount()
   const [isEnrolled, setIsEnrolled] = useState(false)
-    const [currentCheckpoint, setCurrentCheckpoint] = useState(0);
+  const [currentCheckpoint, setCurrentCheckpoint] = useState(0)
   async function checkIfWalletIsConnected() {
     const { ethereum } = window
     if (ethereum) {
@@ -41,8 +41,8 @@ export default function Course() {
     console.log(tx)
     if (tx) {
       if (tx.from === address) {
-        setIsEnrolled(true);
-        setCurrentCheckpoint(tx.currentCheckpoints.toNumber());
+        setIsEnrolled(true)
+        setCurrentCheckpoint(tx.currentCheckpoints.toNumber())
       }
     }
   }
@@ -59,11 +59,11 @@ export default function Course() {
     }
   }
 
-  function ontakeQuiz(){
-    router.push('/quiz');
+  function ontakeQuiz() {
+    router.push('/quiz')
   }
   useEffect(() => {
-    checkIfWalletIsConnected();
+    checkIfWalletIsConnected()
     getStudent()
   }, [])
 
@@ -83,19 +83,26 @@ export default function Course() {
           {isEnrolled && <button className={styles.enrolledButton}>Enrolled</button>}
         </div>
         <div className={styles.avatar}>
-          <div className="col-span-3">
-          <Image src={chck1} width={90} height={100}></Image>
-          </div>
-          <div className="col-span-3">
-          <Image src={chck2} width={90} height={100}></Image>
-          </div>
-          <div className="col-span-3">
-          <Image src={chck3} width={90} height={100}></Image>
-          </div>
-          <div className="col-span-3">
-          <Image src={chck4} width={90} height={100}></Image>
-          </div>
-
+          {currentCheckpoint >= 1 && (
+            <div className="col-span-3">
+              <Image src={chck1} width={90} height={100}></Image>
+            </div>
+          )}
+          {currentCheckpoint >= 2 && (
+            <div className="col-span-3">
+              <Image src={chck2} width={90} height={100}></Image>
+            </div>
+          )}
+          {currentCheckpoint >= 3 && (
+            <div className="col-span-3">
+              <Image src={chck3} width={90} height={100}></Image>
+            </div>
+          )}
+          {currentCheckpoint >= 4 && (
+            <div className="col-span-3">
+              <Image src={chck4} width={90} height={100}></Image>
+            </div>
+          )}
         </div>
         <div className={styles.answers}>
           <div className="grid grid-cols-12 gap-2">
@@ -107,7 +114,7 @@ export default function Course() {
               Learn about Alchemy's Road to Web3 series, a 10 week, self-paced Web3 developer program to help new
               blockchain devs go from beginner to advanced.
             </div>
-            {isEnrolled && (currentCheckpoint === 0) && (
+            {isEnrolled && currentCheckpoint === 0 && (
               <div className={styles.takeorquiz}>
                 <button className={styles.take}>
                   VIEW LESSON
@@ -137,7 +144,7 @@ export default function Course() {
                 </button>
               </div>
             )}
-             {(currentCheckpoint > 0) && <p>Completed</p>}
+            {currentCheckpoint > 0 && <p>Completed</p>}
           </div>
           <hr className={styles.hr}></hr>
           <div className="grid grid-cols-12 gap-2">
@@ -149,7 +156,7 @@ export default function Course() {
               Buy me a coffee is a popular website that all kinds of people use to create a landing page where anyone
               can send some amount of money.
             </div>
-            {isEnrolled && (currentCheckpoint === 1) && (
+            {isEnrolled && currentCheckpoint === 1 && (
               <div className={styles.takeorquiz}>
                 <button className={styles.take}>
                   VIEW LESSON
@@ -179,10 +186,8 @@ export default function Course() {
                 </button>
               </div>
             )}
-            {(currentCheckpoint < 1) && <p>Locked</p>}
-            {(currentCheckpoint > 1) && <p>Completed</p>}
-
-
+            {currentCheckpoint < 1 && <p>Locked</p>}
+            {currentCheckpoint > 1 && <p>Completed</p>}
           </div>
           <hr className={styles.hr}></hr>
           <div className="grid grid-cols-12 gap-2">
@@ -194,8 +199,8 @@ export default function Course() {
               Make a NFT on chain is a basic of blockchain game that drastically reduce gas cost. Make one of your own
               today!
             </div>
-            {isEnrolled && (currentCheckpoint === 2) && (
-              <div className={styles.takeorquiz}onClick={ontakeQuiz}>
+            {isEnrolled && currentCheckpoint === 2 && (
+              <div className={styles.takeorquiz} onClick={ontakeQuiz}>
                 <button className={styles.take}>
                   VIEW LESSON
                   <svg
@@ -224,9 +229,8 @@ export default function Course() {
                 </button>
               </div>
             )}
-            {(currentCheckpoint < 2) && <p>Locked</p>}
-            {(currentCheckpoint > 2) && <p>Completed</p>}
-
+            {currentCheckpoint < 2 && <p>Locked</p>}
+            {currentCheckpoint > 2 && <p>Completed</p>}
           </div>
           <hr className={styles.hr}></hr>
           <div className="grid grid-cols-12 gap-2">
@@ -238,7 +242,7 @@ export default function Course() {
               In this tutorial, we are going to learn how to use the Alchemy NFT API to build an NFT gallery. So let's
               start now.
             </div>
-            {isEnrolled && (currentCheckpoint === 3) &&(
+            {isEnrolled && currentCheckpoint === 3 && (
               <div className={styles.takeorquiz}>
                 <button className={styles.take}>
                   VIEW LESSON
@@ -268,10 +272,8 @@ export default function Course() {
                 </button>
               </div>
             )}
-             {(currentCheckpoint < 3) && <p>Locked</p>}
-             {(currentCheckpoint > 3) && <p>Completed</p>}
-
-
+            {currentCheckpoint < 3 && <p>Locked</p>}
+            {currentCheckpoint > 3 && <p>Completed</p>}
           </div>
         </div>
       </div>
