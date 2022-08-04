@@ -6,10 +6,10 @@ import badge_background from '../../../public/badge_background.png'
 import { auto } from '@popperjs/core'
 import { useState, useEffect } from 'react'
 import { Greeter__factory } from '../../typechain'
-import { ethers } from 'ethers'
+import { BigNumber, ethers } from 'ethers'
 
 export default function Verify() {
-  const [inputToken, setInputToken] = useState()
+  const [inputToken, setInputToken] = useState(0)
   let contract
   
   async function checkIfWalletIsConnected() {
@@ -41,7 +41,6 @@ export default function Verify() {
     contract = Greeter__factory.connect(data.contractAddress, signer)
     let tx = await contract.ownerOf(inputToken)
  //   let reciept = await tx.wait()
-    console.log(tx)
   }
   return (
     <div>
@@ -57,7 +56,7 @@ export default function Verify() {
               <input
                 value={inputToken}
                 onChange={e => setInputToken(e.target.value)}
-                type="text"
+                type="number"
                 id="simple-search"
                 className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="Enter your token ID"
