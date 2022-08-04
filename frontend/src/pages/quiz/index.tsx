@@ -34,6 +34,7 @@ export default function Quiz() {
     console.log(reciept);
     if(reciept)
     {
+        
         router.push('/course');
     }
 }
