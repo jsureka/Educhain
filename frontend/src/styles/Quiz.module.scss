@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito+Sans:wght@400;600;700;800;900&family=Poppins:wght@600&family=Ubuntu:wght@700&display=swap');
+
+.heading {
+    width: 100%;
+    height: 60px;
+    font-family: 'Nunito Sans Bold', sans-serif;
+    font-style: bold;
+    font-size: 25px;
+    background-color: #395BD1;
+    color: antiquewhite;
+  }
+
+  .bgcolor {
+    height: 100vh;
+    background-color: #334073;
+  }
+
+  .appName{
+    text-align: center;
+    padding: 15px;
+  }
+
+  .ques{
+    margin-top: 5%;
+    color: rgb(250, 235, 215);
+    text-align: center;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .optionsR, .optionsL{
+    background-image: url("../../public/quizButton.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 100px;
+    // margin: 0 0 20px 100px;
+    margin: 30px 0 20px 0;
+    text-align: center;
+  }
+
+  .optionsL{
+    margin-left: 40%;
+  }
+
+  .optionsR{
+    margin-left: 10%;
+  }
+
+  .answers{
+    margin-top: 2%;
+  }
+
+ .singleOptionL{
+    font-size: 20px;
+    margin-top: 25px;
+    margin-left: -100px;
+  }
+
+  .singleOptionR{
+    font-size: 20px;
+    margin-top: 25px;
+    margin-left: -300px;
+  }
