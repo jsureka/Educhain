@@ -27,7 +27,7 @@ function Header() {
     return (
         <header >
             <div className={styles.heading}>
-                <h1 className={styles.appName}>EduChain</h1>
+                <h1 className={styles.appName}>MY WALLET</h1>
             </div>
         </header>
     )
@@ -106,147 +106,90 @@ function Main() {
 
     return (
         <main className={styles.main + ' space-y-2'}>
+            
             <div className="grid grid-cols-12 gap-2">
-                <div className='col-span-4'>
+                <div className={styles.ConnectButton}>
                     <div className={styles.metamaskIcon}>
                         <Image src={image}></Image>
                     </div>
                     <div className="flex w-full flex-col items-center">
-                        <button onClick={openConnectModal}
+                        {!isConnected && <button onClick={openConnectModal}
                             type="button"
                             className={styles.connectWallet}>
                             CONNECT
-                        </button>
+                        </button>}
+                        {isConnected && <button onClick={openConnectModal}
+                            type="button"
+                            className={styles.connectedWallet}>
+                            CONNECTED
+                        </button>}
+
                     </div>
                 </div>
+                
                 <div className='col-span-2'></div>
                 <div className='col-span-5'>
                     <div className={styles.walletInfo}>
                         <div className={styles.dl}>
-                            <dt>Connector</dt>
-                            <dd>
-                                {connector?.name}
-                                {!address && (
-                                    <ConnectButton.Custom>
-                                        {({ openConnectModal }) => (
-                                            <span onClick={openConnectModal} className="cursor-pointer hover:underline">
-                                                Not connected, connect wallet
-                                            </span>
+                            <div className={styles.connectorNetworkBoth}>
+                                <div className={styles.connector}>
+                                    <dt>Connector</dt>
+                                    <dd>
+                                        {connector?.name}
+                                        {!address && (
+                                            <ConnectButton.Custom>
+                                                {({ openConnectModal }) => (
+                                                    <span onClick={openConnectModal} className="cursor-pointer hover:underline">
+                                                        Not connected
+                                                    </span>
+                                                )}
+                                            </ConnectButton.Custom>
                                         )}
-                                    </ConnectButton.Custom>
-                                )}
-                            </dd>
-                            <dt>Connected Network</dt>
-                            <dd>{chain ? `${chain?.id}: ${chain?.name}` : 'n/a'}</dd>
-                            <dt>Switch Network</dt>
-                            <dd className="flex flex-wrap justify-center">
-                                {isConnected &&
-                                    chains.map(x => (
-                                        <button
-                                            disabled={!switchNetwork || x.id === chain?.id}
-                                            key={x.id}
-                                            onClick={() => switchNetwork?.(x.id)}
-                                            className={
-                                                (x.id === chain?.id ? 'bg-green-500' : 'bg-blue-500 hover:scale-105') +
-                                                ' m-1 rounded-lg py-1 px-3 text-white transition-all duration-150'
-                                            }
-                                        >
-                                            {x.name}
-                                            {isNetworkLoading && pendingChainId === x.id && ' (switching)'}
-                                        </button>
-                                    ))}
-                                <ConnectWallet show="disconnected" />
-                            </dd>
-                            <dt>Account</dt>
-                            <dd className="break-all">{address ? `${address}` : 'n/a'}</dd>
-                            <dt>Balance</dt>
-                            <dd className="break-all">
-                                {isBalanceLoading ? 'loading' : balance ? `${balance?.formatted} ${balance?.symbol}` : 'n/a'}
-                            </dd>
+                                    </dd>
+                                </div>
+                                <div className={styles.network}>
+                                    <dt>Connected Network</dt>
+                                    <dd>{chain ? `${chain?.id}: ${chain?.name}` : 'n/a'}</dd>
+                                </div>
+                            </div>
+                            <div className={styles.switch}>
+                                <dt>Switch Network</dt>
+                                <dd className="flex flex-wrap justify-center">
+                                    {isConnected &&
+                                        chains.map(x => (
+                                            <button
+                                                disabled={!switchNetwork || x.id === chain?.id}
+                                                key={x.id}
+                                                onClick={() => switchNetwork?.(x.id)}
+                                                className={
+                                                    (x.id === chain?.id ? 'bg-green-500' : 'bg-blue-500 hover:scale-105') +
+                                                    ' m-1 rounded-lg py-1 px-3 text-white transition-all duration-150'
+                                                }
+                                            >
+                                                {x.name}
+                                                {isNetworkLoading && pendingChainId === x.id && ' (switching)'}
+                                            </button>
+                                        ))}
+                                    <ConnectWallet show="disconnected" />
+                                </dd>
+                            </div>
+                            <div className={styles.accbalance}>
+                                <div className={styles.account}>
+                                    <dt>Account</dt>
+                                    <dd className={styles.accbalanceInfo}>{address ? `${address}` : 'n/a'}</dd>
+                                </div>
+                                <div className={styles.balance}>
+                                    <dt>Balance</dt>
+                                    <dd className={styles.accbalanceInfo}>
+                                        {isBalanceLoading ? 'loading' : balance ? `${balance?.formatted} ${balance?.symbol}` : 'n/a'}
+                                    </dd>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-
-            {showAlert ? (
-                <div
-                    className={
-                        "text-white px-6 py-4 border-0 rounded relative mb-4 bg-teal-500 sticky top-0 z-50"
-                    }
-                >
-                    <span className="text-xl inline-block mr-5 align-middle">
-                        <i className="fas fa-bell" />
-                    </span>
-                    <span className="inline-block align-middle mr-8">
-                        <b className="capitalize">Transaction succeded!</b> View on etherscan:
-                        <a href={"https://rinkeby.etherscan.io/tx/" + txHash} target="_blank" className="underline italic"> Etherscan Link</a>
-
-                    </span>
-                    <button
-                        className="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none"
-                        onClick={() => setShowAlert(false)}
-                    >
-                        <span>×</span>
-                    </button>
-                </div>
-            ) : null}
-            {address && (
-
-                <div className='flex items-center justify-center min-h-screen from-teal-100 via-teal-300 to-teal-500 bg-gradient-to-br w-screen'>
-
-
-                    <div className="flex flex-col items-center justify-center relative">
-
-                        <div
-                            id="partnerCard"
-                            className="bg-[#1c1c1c] text-gray-50 overflow-hidden rounded-md max-w-m p-2 min-h-[500px] flex flex-col"
-                        >
-                            <div>
-                                <h3 className="text-left pl-8 pb-4 pt-2 text-xl">
-                                    Greeting App
-                                </h3>
-                            </div>
-
-                            <div className="flex items-center justify-center bg-[#2a2a2a] min-h-[200px]">
-
-
-                                <img
-                                    src="https://media.istockphoto.com/photos/hand-is-turning-a-dice-and-changes-the-word-meet-to-greet-picture-id1084115310?k=20&m=1084115310&s=612x612&w=0&h=TwrnLk7i0jdfixAxbJdd8_LF9ZOnkvM-1DGn-_VELHA="
-                                    alt="EasyCode"
-                                    className="w-100 object-cover"
-                                />
-
-                            </div>
-                            <div className="grid grid-cols-6">
-                                <div className="p-4 pr-0 text-lg col-span-4">
-                                    <h4 className="font-bold">
-                                        Current Greetings:
-                                    </h4>
-
-                                    <p>{greet}</p>
-                                </div>
-
-                            </div>
-                            <div>
-                                <form className="m-4 flex">
-                                    <input value={currentValue}
-                                        onChange={(evt) => handleChange(evt)}
-                                        className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="Enter new greet" />
-                                    <button
-                                        onClick={setGreetings}
-                                        className="px-8 rounded-r-lg bg-yellow-400  text-gray-800 font-bold p-4 uppercase border-yellow-500 border-t border-b border-r">Set Greet</button>
-                                </form>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-            )
-
-
-            }
         </main>
     )
 }
