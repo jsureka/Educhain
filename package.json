@@ -47,5 +47,10 @@
     "deploy:bsctest": "npx hardhat run --network kovan scripts/deploy.ts",
     "deploy:bscmain": "npx hardhat run --network bscmain scripts/deploy.ts",
     "test": "npx hardhat test"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
   }
 }
