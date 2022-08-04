@@ -12,7 +12,8 @@ import { useSignMessage } from 'wagmi'
 // import GreeterArtifact from '../../../artifacts/contracts/Greeter.sol/Greeter.json';
 import { Greeter__factory } from '../../typechain';
 import image from '../../../public/metamask.png'
-import Image from 'next/image'
+import Image from 'next/image';
+import Navbar from 'components/navbar/navbar'
 
 export default function Metamask() {
     return (
@@ -25,11 +26,7 @@ export default function Metamask() {
 
 function Header() {
     return (
-        <header >
-            <div className={styles.heading}>
-                <h1 className={styles.appName}>MY WALLET</h1>
-            </div>
-        </header>
+        <Navbar></Navbar>
     )
 }
 
@@ -126,7 +123,7 @@ function Main() {
 
                     </div>
                 </div>
-                
+
                 <div className='col-span-2'></div>
                 <div className='col-span-5'>
                     <div className={styles.walletInfo}>

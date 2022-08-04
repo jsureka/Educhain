@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import styles from 'styles/Quiz.module.scss';
+import Navbar from 'components/navbar/navbar';
 import image from '../../../public/quizButton.png'
 
 export default function Quiz() {
     return (
+        <Navbar></Navbar>
         <div className={styles.bgcolor}>
             <div className={styles.heading}>
                 <h1 className={styles.appName}>Take your time! Complete the Quiz</h1>

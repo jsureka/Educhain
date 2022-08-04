@@ -1,4 +1,5 @@
 import styles from 'styles/Verify.module.scss'
+import Navbar from 'components/navbar/navbar'
 import data from '../../info/data.json'
 import Image from 'next/image'
 import certificate from '../../../public/certificate.png'
@@ -7,7 +8,6 @@ import { auto } from '@popperjs/core'
 import { useState, useEffect } from 'react'
 import { Greeter__factory } from '../../typechain'
 import { BigNumber, ethers } from 'ethers'
-
 export default function Verify() {
   const [inputToken, setInputToken] = useState(0)
   let contract
@@ -44,7 +44,7 @@ export default function Verify() {
   }
   return (
     <div>
-      <Header></Header>
+      <Navbar></Navbar>
       <h2 className={styles.header}> Verify your Badge</h2>
       <div className=" grid grid-cols-12">
         <div className=" col-span-3"></div>
