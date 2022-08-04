@@ -19,3 +19,25 @@
     color: #395BD1;
     margin: 20px;
   }
+
+  .image1{
+    @apply col-span-3 pt-10;
+    width:400px;
+    height:300px;
+    display: inline-flex;
+    margin-top: 1rem;
+    margin-left: 9rem;
+  }
+
+  .image2{
+    @apply col-span-2 mt-14;
+    background-image: url('../../public/badge_background.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    text-align: center;
+    padding-top: 4rem;
+    width:210px;
+    height:250px;
+    margin-top: 4rem;
+    margin-left: 13rem;
+  }
