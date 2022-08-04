@@ -1,8 +1,10 @@
 import styles from 'styles/Verify.module.scss'
+import Navbar from 'components/navbar/navbar'
+
 export default function Verify() {
   return (
     <div>
-      <Header></Header>
+      <Navbar></Navbar>
       <h2 className={styles.header}> Verify your Badge</h2>
       <div className=" grid grid-cols-12">
         <div className=" col-span-3"></div>

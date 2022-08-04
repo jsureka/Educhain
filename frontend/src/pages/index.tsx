@@ -1,4 +1,5 @@
 import styles from 'styles/Home.module.scss'
+import Navbar from 'components/navbar/navbar'
 import data from '../info/data.json'
 import { ethers } from 'ethers'
 import ThemeToggleButton from 'components/Theme/ThemeToggleButton'
@@ -36,11 +37,7 @@ export default function Home() {
 
 function Header() {
   return (
-    <header>
-      <div className={styles.heading}>
-        <h1 className={styles.appName}>EduChain</h1>
-      </div>
-    </header>
+    <Navbar></Navbar>
   )
 }
 
