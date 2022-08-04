@@ -31,13 +31,6 @@ function Header() {
 }
 
 function Main() {
-    const [showAlert, setShowAlert] = useState(false);
-    const [txHash, setTxHash] = useState("");
-
-    // greeter.greet
-    const [greet, setgreet] = useState("Hi");
-    const [currentValue, setCurrentValue] = useState("");
-
     let contract;
 
 
@@ -60,31 +53,6 @@ function Main() {
         checkIfWalletIsConnected();
     }, [])
     console.log(data.contractAddress);
-
-    async function setGreetings(evt) {
-        evt.preventDefault();
-
-        checkIfWalletIsConnected();
-        console.log("Set greeting");
-
-        console.log("Set method:");
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        contract = Greeter__factory.connect(data.contractAddress, signer);
-        let tx = await contract.setGreeting(currentValue.toString(), { from: signer.getAddress(), gasLimit: 200000, value: 10000000000000 });
-        let reciept = await tx.wait();
-        console.log(reciept);
-        setTxHash(reciept.transactionHash);
-        setShowAlert(true);
-        setgreet(await contract.greet());
-    }
-
-    function handleChange(evt) {
-        console.log(evt.currentTarget.value);
-
-        setCurrentValue(evt.currentTarget.value);
-    }
-
 
     const { address, isConnected, connector } = useAccount()
     const { chain, chains } = useNetwork()

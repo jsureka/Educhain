@@ -12,7 +12,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
 contract Greeter is ERC721, EIP712, ERC721URIStorage {
   string private greeting;
-  address private _owner;
+  address payable _owner;
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIdCounter;
 
@@ -36,6 +36,7 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
 
   constructor() ERC721("EduChain", "EDC") EIP712("EduChain", "1") {
     console.log("Deployed the Contract:");
+    _owner = payable(msg.sender);
   }
 
   function unsafe_inc(uint x) private pure returns (uint) 
@@ -72,7 +73,7 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
         require(_studentTemp[i].currentCheckpoints <= 4, "Checkpoints Completed!");
 
         // To make profit
-        uint128 sendValue = 10000000000000 / 8;
+        uint128 sendValue = 10000000000000 / 5;
         (bool sent, bytes memory data) = msg.sender.call{ value: sendValue }(
           ""
         );
@@ -128,4 +129,8 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
   {
     return super.tokenURI(tokenId);
   }
+
+      function withdrawTips() public {
+        require(_owner.send(address(this).balance));
+    }
 }

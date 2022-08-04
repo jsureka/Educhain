@@ -67,7 +67,7 @@
     display: inline-flex;
   }
 
-  .take:hover, .quiz:hover{
+  .take:hover, .quiz:hover, .enrollButton:hover{
     @apply text-white bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700;
     background-color: #152c7e;
   }
@@ -81,7 +81,10 @@
     background-color: #E27C36;
   }
 
-
+  .enrollButton{
+    @apply text-white bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700;
+    background-color: #E27C36;
+  }
   .takeorquiz{
     margin-top: 60%;
     margin-left: 70%;

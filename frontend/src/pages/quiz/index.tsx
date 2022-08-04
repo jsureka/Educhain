@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import styles from 'styles/Quiz.module.scss'
+import router from 'next/router'
 import Navbar from 'components/navbar/navbar'
 import image from '../../../public/quizButton.png'
 import data from '../../info/data.json'
@@ -31,7 +32,10 @@ export default function Quiz() {
     let tx = await contract.transferValue();
     let reciept = await tx.wait();
     console.log(reciept);
-
+    if(reciept)
+    {
+        router.push('/course');
+    }
 }
 
   useEffect(() => {
@@ -39,7 +43,7 @@ export default function Quiz() {
   }, [])
 
   function checkAnswer(answer) {
-    if (answer != 4) {
+    if (answer !== 4) {
       setShowAlert(true)
     } else {
       setSuccessAlert(true);
