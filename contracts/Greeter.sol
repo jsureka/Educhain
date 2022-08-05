@@ -64,9 +64,9 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
     );
   }
 
-  function transferValue() external {
+  function transferValue() external returns(uint128 currentCheckpoint){
     Student[] storage _studentTemp= students;
-
+    uint128 checkpoint;
 // gas optimization
     for (uint256 i; i < _studentTemp.length; i= unsafe_inc(i)) {
       if (_studentTemp[i].from == msg.sender) {
@@ -80,6 +80,7 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
 
         require(sent, "Failed to send Ether");
       _studentTemp[i].currentCheckpoints++;
+      checkpoint = _studentTemp[i].currentCheckpoints;
       }
 
   Student[] students;
@@ -134,6 +135,7 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
         // require(owner.send(address(this).balance));
 
     students=_studentTemp;
+    return(checkpoint);
   }
 
 
