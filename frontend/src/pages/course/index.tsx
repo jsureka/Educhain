@@ -9,6 +9,10 @@ import { useAccount } from 'wagmi'
 import { useEffect, useState } from 'react'
 import router from 'next/router'
 import lock from '../../../public/locked.png'
+import chck1 from '../../../public/lvl1.png'
+import chck2 from '../../../public/lvl2.png'
+import chck3 from '../../../public/lvl3.png'
+import chck4 from '../../../public/lvl4.png'
 
 export default function Course() {
   let contract
@@ -79,17 +83,17 @@ export default function Course() {
           {isEnrolled && <button className={styles.enrolledButton}>Enrolled</button>}
         </div>
         <div className={styles.avatar}>
-          <div className="grid-colspan-3">
-          <Image src={lock} width={60} height={60}></Image>
+          <div className="col-span-3">
+          <Image src={chck1} width={90} height={100}></Image>
           </div>
-          <div className="grid-colspan-3">
-          <Image src={lock} width={60} height={60}></Image>
+          <div className="col-span-3">
+          <Image src={chck2} width={90} height={100}></Image>
           </div>
-          <div className="grid-colspan-3">
-          <Image src={lock} width={60} height={60}></Image>
+          <div className="col-span-3">
+          <Image src={chck3} width={90} height={100}></Image>
           </div>
-          <div className="grid-colspan-3">
-          <Image src={lock} width={60} height={60}></Image>
+          <div className="col-span-3">
+          <Image src={chck4} width={90} height={100}></Image>
           </div>
 
         </div>
