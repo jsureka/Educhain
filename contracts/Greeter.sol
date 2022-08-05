@@ -12,11 +12,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
 contract Greeter is ERC721, EIP712, ERC721URIStorage {
   string private greeting;
-<<<<<<< HEAD
-  address payable _owner;
-=======
   address private _owner;
->>>>>>> bce91d0528dc1b162adeddeac8ae1bf3e0262c0f
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIdCounter;
 
@@ -31,7 +27,6 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
     uint128 course_id;
     uint128 currentCheckpoints;
   }
-<<<<<<< HEAD
 
   Student[] students;
   modifier onlyOwner() {
@@ -86,7 +81,6 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
         require(sent, "Failed to send Ether");
       _studentTemp[i].currentCheckpoints++;
       }
-=======
 
   Student[] students;
   modifier onlyOwner() {
@@ -102,7 +96,6 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
   {
     unchecked {
         return x+1;
->>>>>>> bce91d0528dc1b162adeddeac8ae1bf3e0262c0f
     }
   }
 
@@ -140,7 +133,6 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
 
         // require(owner.send(address(this).balance));
 
-<<<<<<< HEAD
     students=_studentTemp;
   }
 
@@ -153,11 +145,9 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
 // gas optimization ,using unsafe_inc,local storage to decrease gas fee
     for (uint256 i; i < students.length; i= unsafe_inc(i)) {
       if (students[i].from == msg.sender) return students[i];
-=======
         require(sent, "Failed to send Ether");
       _studentTemp[i].currentCheckpoints++;
       }
->>>>>>> bce91d0528dc1b162adeddeac8ae1bf3e0262c0f
     }
     
   }
@@ -193,11 +183,6 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
     return super.tokenURI(tokenId);
   }
 
-<<<<<<< HEAD
-      function withdrawTips() public {
-        require(_owner.send(address(this).balance));
-    }
-=======
     students=_studentTemp;
   }
 
@@ -244,5 +229,4 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
   {
     return super.tokenURI(tokenId);
   }
->>>>>>> bce91d0528dc1b162adeddeac8ae1bf3e0262c0f
 }

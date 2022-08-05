@@ -32,7 +32,7 @@
     margin-top: 5%;
     font-family: 'Ubuntu', sans-serif;
     font-style: bold;
-    font-size: 55px;
+    font-size: 45px;
     color: #395BD1;
   }
 
@@ -88,13 +88,30 @@
   }
 
   .enrollButton{
-    @apply text-white bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700;
+    @apply text-white font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2;
     background-color: #E27C36;
+    margin-top: 50px;
+    font-size: 20px;
+    height: 3rem;
+    width: 10rem;
   }
+
+  .enrolledButton{
+    background-color: #04610f;
+    margin-top: 50px;
+    font-size: 20px;
+    height: 3rem;
+    width: 10rem;
+  }
+
+  .enrollButton:hover{
+    background-color: #152c7e;
+  }
+
   .takeorquiz{
     margin-top: 60%;
     margin-left: 70%;
-    margin-bottom: 20%;
+    margin-bottom: 20rem;
   }
 
   .hr{

@@ -74,7 +74,7 @@ export default function Course() {
               Enroll
             </button>
           )}
-          {isEnrolled && <button className={styles.enrollButton}>Enrolled</button>}
+          {isEnrolled && <button className={styles.enrolledButton}>Enrolled</button>}
         </div>
         <div className={styles.answers}>
           <div className="grid grid-cols-12 gap-2">
