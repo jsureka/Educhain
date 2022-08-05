@@ -75,12 +75,18 @@ export default function Course() {
           <h1>
             Learn <br /> Blockchain
           </h1>
+          <div className={styles.buttons}>
           {!isEnrolled && (
             <button className={styles.enrollButton} onClick={onEnroll}>
               Enroll
             </button>
           )}
           {isEnrolled && <button className={styles.enrolledButton}>Enrolled</button>}
+
+          <button className={styles.getCerButton}>
+              Get Your Certificate
+            </button>
+          </div>
         </div>
         <div className={styles.avatar}>
           <div className="col-span-3">
