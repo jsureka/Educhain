@@ -10,6 +10,8 @@ import { Greeter__factory } from '../../typechain'
 import { BigNumber, ethers } from 'ethers'
 export default function Verify() {
   const [inputToken, setInputToken] = useState(0)
+  const [successAlert, setSuccessAlert] = useState(false)
+
   let contract
   
   async function checkIfWalletIsConnected() {
@@ -40,6 +42,10 @@ export default function Verify() {
     const signer = provider.getSigner()
     contract = Greeter__factory.connect(data.contractAddress, signer)
     let tx = await contract.ownerOf(inputToken)
+    if(tx)
+    {
+      setSuccessAlert(true);
+    }
  //   let reciept = await tx.wait()
   }
   return (
