@@ -8,6 +8,8 @@ import { Greeter__factory } from '../../typechain'
 import { useAccount } from 'wagmi'
 import { useEffect, useState } from 'react'
 import router from 'next/router'
+import lock from '../../../public/locked.png'
+
 export default function Course() {
   let contract
   const { address, isConnected, connector } = useAccount()
@@ -75,6 +77,21 @@ export default function Course() {
             </button>
           )}
           {isEnrolled && <button className={styles.enrolledButton}>Enrolled</button>}
+        </div>
+        <div className={styles.avatar}>
+          <div className="grid-colspan-3">
+          <Image src={lock} width={60} height={60}></Image>
+          </div>
+          <div className="grid-colspan-3">
+          <Image src={lock} width={60} height={60}></Image>
+          </div>
+          <div className="grid-colspan-3">
+          <Image src={lock} width={60} height={60}></Image>
+          </div>
+          <div className="grid-colspan-3">
+          <Image src={lock} width={60} height={60}></Image>
+          </div>
+
         </div>
         <div className={styles.answers}>
           <div className="grid grid-cols-12 gap-2">

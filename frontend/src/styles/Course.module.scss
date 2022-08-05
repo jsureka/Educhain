@@ -117,3 +117,9 @@
   .hr{
     border-top: 1px solid #152c7e;
   }
+
+  .avatar{
+    @apply grid grid-cols-12 gap-2;
+    margin-top: 5%;
+    margin-left: 40%;
+  }
