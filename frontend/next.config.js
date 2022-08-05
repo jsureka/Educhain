@@ -1,6 +1,11 @@
+/** @type {import('next').NextConfig} */
 module.exports = {
-  reactStrictMode: true
-
+  reactStrictMode: true,
+  webpack5:true,
+  webpack: (config) => {
+    config.resolve.fallback = {fs : false};
+    return config;
+  }
   /*  AssetPrefix
     --------------------------------------------------------------------------------
     AssetPrefix is used to determine where the "app" folder is located.

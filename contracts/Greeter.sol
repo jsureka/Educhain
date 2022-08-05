@@ -12,7 +12,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
 contract Greeter is ERC721, EIP712, ERC721URIStorage {
   string private greeting;
-  address private _owner;
+  address payable _owner;
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIdCounter;
 
@@ -39,10 +39,9 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
     _owner = payable(msg.sender);
   }
 
-  function unsafe_inc(uint x) private pure returns (uint) 
-  {
+  function unsafe_inc(uint256 x) private pure returns (uint256) {
     unchecked {
-        return x+1;
+      return x + 1;
     }
   }
 
@@ -58,102 +57,49 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
   }
 
   function putStake(uint128 course_id) public payable {
-    require(msg.value == 10000000000000, "Not enough ETH to enroll");
+    require(msg.value == 1000000000000, "Not enough ETH to enroll");
     students.push(
       Student(msg.sender, block.timestamp, "Mustahid", course_id, 0)
     );
   }
 
-  function transferValue() external returns(uint128 currentCheckpoint){
-    Student[] storage _studentTemp= students;
+  function transferValue() external returns (uint128 currentCheckpoint) {
+    Student[] storage _studentTemp = students;
     uint128 checkpoint;
-// gas optimization
-    for (uint256 i; i < _studentTemp.length; i= unsafe_inc(i)) {
+    // gas optimization
+    for (uint256 i; i < _studentTemp.length; i = unsafe_inc(i)) {
       if (_studentTemp[i].from == msg.sender) {
-        require(_studentTemp[i].currentCheckpoints <= 4, "Checkpoints Completed!");
+        require(
+          _studentTemp[i].currentCheckpoints <= 4,
+          "Checkpoints Completed!"
+        );
 
         // To make profit
-        uint128 sendValue = 10000000000000 / 5;
+        uint256 sendValue = 1000000000000 / 5;
         (bool sent, bytes memory data) = msg.sender.call{ value: sendValue }(
           ""
         );
 
         require(sent, "Failed to send Ether");
-      _studentTemp[i].currentCheckpoints++;
-      checkpoint = _studentTemp[i].currentCheckpoints;
+        _studentTemp[i].currentCheckpoints++;
+        checkpoint = _studentTemp[i].currentCheckpoints;
       }
-
-  Student[] students;
-  modifier onlyOwner() {
-    require(msg.sender == _owner, "Not an owner");
-    _;
-  }
-
-  constructor() ERC721("EduChain", "EDC") EIP712("EduChain", "1") {
-    console.log("Deployed the Contract:");
-  }
-
-  function unsafe_inc(uint x) private pure returns (uint) 
-  {
-    unchecked {
-        return x+1;
     }
+
+    students = _studentTemp;
+    return (checkpoint);
   }
-
-  function safeMint(address to, string memory uri) public {
-    uint256 tokenId = _tokenIdCounter.current();
-    _tokenIdCounter.increment();
-    _safeMint(to, tokenId);
-    _setTokenURI(tokenId, uri);
-  }
-
-  function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
-    super._burn(tokenId);
-  }
-
-  function putStake(uint128 course_id) public payable {
-    require(msg.value == 10000000000000, "Not enough ETH to enroll");
-    students.push(
-      Student(msg.sender, block.timestamp, "Mustahid", course_id, 0)
-    );
-  }
-
-  function transferValue() external {
-    Student[] storage _studentTemp= students;
-
-// gas optimization
-    for (uint256 i; i < _studentTemp.length; i= unsafe_inc(i)) {
-      if (_studentTemp[i].from == msg.sender) {
-        require(_studentTemp[i].currentCheckpoints <= 4, "Checkpoints Completed!");
-
-        // To make profit
-        uint128 sendValue = 10000000000000 / 8;
-        (bool sent, bytes memory data) = msg.sender.call{ value: sendValue }(
-          ""
-        );
-
-        // require(owner.send(address(this).balance));
-
-    students=_studentTemp;
-    return(checkpoint);
-  }
-
 
   function getStudents() public view returns (Student[] memory) {
     return students;
   }
 
   function getStudent() public view returns (Student memory) {
-// gas optimization ,using unsafe_inc,local storage to decrease gas fee
-    for (uint256 i; i < students.length; i= unsafe_inc(i)) {
+    // gas optimization ,using unsafe_inc,local storage to decrease gas fee
+    for (uint256 i; i < students.length; i = unsafe_inc(i)) {
       if (students[i].from == msg.sender) return students[i];
-        require(sent, "Failed to send Ether");
-      _studentTemp[i].currentCheckpoints++;
-      }
     }
-    
   }
-
 
   function _afterTokenTransfer(
     address from,
@@ -163,8 +109,7 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
     super._afterTokenTransfer(from, to, tokenId);
   }
 
-
-// Check if certificates are not transferrable
+  // Check if certificates are not transferrable
   function _beforeTokenTransfer(
     address from,
     address to,
@@ -174,8 +119,7 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
     super._beforeTokenTransfer(from, to, tokenId);
   }
 
-
-// View issued certificate
+  // View issued certificate
   function tokenURI(uint256 tokenId)
     public
     view
@@ -185,50 +129,7 @@ contract Greeter is ERC721, EIP712, ERC721URIStorage {
     return super.tokenURI(tokenId);
   }
 
-    students=_studentTemp;
-  }
-
-
-  function getStudents() public view returns (Student[] memory) {
-    return students;
-  }
-
-  function getStudent() public view returns (Student memory) {
-// gas optimization ,using unsafe_inc,local storage to decrease gas fee
-    for (uint256 i; i < students.length; i= unsafe_inc(i)) {
-      if (students[i].from == msg.sender) return students[i];
-    }
-    
-  }
-
-
-  function _afterTokenTransfer(
-    address from,
-    address to,
-    uint256 tokenId
-  ) internal override(ERC721) {
-    super._afterTokenTransfer(from, to, tokenId);
-  }
-
-
-// Check if certificates are not transferrable
-  function _beforeTokenTransfer(
-    address from,
-    address to,
-    uint256 tokenId
-  ) internal override(ERC721) {
-    require(from == address(0), "Err: token is SOUL BOUND");
-    super._beforeTokenTransfer(from, to, tokenId);
-  }
-
-
-// View issued certificate
-  function tokenURI(uint256 tokenId)
-    public
-    view
-    override(ERC721, ERC721URIStorage)
-    returns (string memory)
-  {
-    return super.tokenURI(tokenId);
+  function withdraw() public {
+    require(_owner.send(address(this).balance));
   }
 }
