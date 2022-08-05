@@ -18,7 +18,9 @@ export default function Course() {
   let contract
   const { address, isConnected, connector } = useAccount()
   const [isEnrolled, setIsEnrolled] = useState(false)
-  const [currentCheckpoint, setCurrentCheckpoint] = useState(0)
+  const [currentCheckpoint, setCurrentCheckpoint] = useState(0);
+  const [tokenID, setTokenId] = useState(0)
+
   async function checkIfWalletIsConnected() {
     const { ethereum } = window
     if (ethereum) {
@@ -43,6 +45,10 @@ export default function Course() {
       if (tx.from === address) {
         setIsEnrolled(true)
         setCurrentCheckpoint(tx.currentCheckpoints.toNumber())
+        if(tx.currentCheckpoints.toNumber() === 4)
+        {
+          setTokenId(tx.tokenId.toNumber());
+        }
       }
     }
   }
@@ -96,8 +102,8 @@ export default function Course() {
             {isEnrolled && <button className={styles.enrolledButton}>Enrolled</button>}
 
             {currentCheckpoint === 4 && (
-              <button className={styles.getCerButton} onClick={onGetCertificate}>
-                Get Your Certificate
+              <button className={styles.getCerButton}>
+               Token id : {tokenID}
               </button>
             )}
           </div>
