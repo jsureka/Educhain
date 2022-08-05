@@ -1,6 +1,4 @@
-# Hardhat Project Boilerplate
-
-Starting project with typescript hardhat boilerplate
+# BUET CSE Hackathon
 
 ## Instruction
 - Compile:
