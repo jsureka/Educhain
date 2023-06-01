@@ -1,3 +1,5 @@
+# *Champions at BUET CSE WEB3 HACKATHON 2022
+
 # Educhain is a decentralised e-learning platform based on
 - Next.js
 - Solidity
