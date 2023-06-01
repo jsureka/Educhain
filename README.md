@@ -3,7 +3,7 @@
 - Solidity
 - Ethereum
 - Hardhat
-Core features include 
+# Core features include 
 - Registering in a course by paying with cryptocurrency
 - Playing a quiz after completion of each segment
 - Winning quiz rewards with cryptocurrencies
